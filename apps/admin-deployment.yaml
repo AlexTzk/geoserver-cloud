@@ -17,6 +17,10 @@ spec:
         environment: "production"
         tier: "geoserver"
     spec:
+      securityContext:
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
       containers:
         - name: "admin"          
           image: geoservercloud/geoserver-cloud-admin-server:1.8.2

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-sh 
+  namespace: default
+  labels:
+    storage: nfs-data 
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 10.36.0.11
+    path: /data/geoserver_data_directory 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-sh # The name of this Persistent Volume Claim
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi # The size of the storage claim.
+  storageClassName: ""
+  selector:
+    matchLabels:
+      storage: "nfs-data" # The volume must have this label with this value.

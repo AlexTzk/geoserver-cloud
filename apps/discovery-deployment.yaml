@@ -1,0 +1,56 @@
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+metadata:
+  name: "discovery"
+  namespace: "default"
+  labels:
+    app: "discovery"
+spec:
+  serviceName: "discovery-server"
+  podManagementPolicy: "OrderedReady"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "discovery"
+  template:
+    metadata:
+      labels:
+        app: "discovery"
+        environment: "production"
+        tier: "geoserver"
+    spec:
+      containers:
+        - image: geoservercloud/geoserver-cloud-discovery:1.8.2
+          name: discovery
+          ports:
+            - containerPort: 8761
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "10m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: eureka.client.serviceUrl.defaultZone
+              value: "http://discovery-server-0.discovery-server:8761/eureka"
+            - name: eureka.instance.hostname
+              value: "${MY_POD_NAME}.discovery-server"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "discovery"
+  labels:
+    app: "discovery"
+spec:
+  selector:
+    app: "discovery"
+  ports:
+  - name: http
+    port: 8761
+    targetPort: 8761

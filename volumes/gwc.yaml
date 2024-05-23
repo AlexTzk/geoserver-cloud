@@ -18,15 +18,15 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: gwc-share 
+  name: gwc-share  # The name of this Persistent Volume Claim
   namespace: default
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 25Gi
+      storage: 25Gi  # The size of the storage claim.
   storageClassName: ""
   selector:
     matchLabels:
-      storage: "gwc-datadir" 
+      storage: "gwc-datadir"  # The volume must have this label with this value.

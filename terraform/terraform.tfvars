@@ -1,0 +1,6 @@
+project = "my-project-123456"
+region = "europe-west2"
+env = "production"
+company = "awesome-company"
+vm_ip_nfs = "10.36.0.11"
+zone = "europe-west2-a"

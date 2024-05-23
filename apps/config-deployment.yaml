@@ -34,13 +34,13 @@ spec:
             memory: "512Mi"
             cpu: "500m"
         env:
-          - name: CONFIG_GIT_URI  ## The X-Token generated for accessing the repository remotely to pull the configuration
-            valueFrom:
-              secretKeyRef:
-               name: "git-xtoken"
-               key: "link"
-          - name: SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT_LABEL  ## REPO branch
-            value: main
+#          - name: CONFIG_GIT_URI  ## The X-Token generated for accessing the repository remotely to pull the configuration
+#            valueFrom:
+#              secretKeyRef:
+#               name: "git-xtoken"
+#               key: "link"
+#          - name: SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT_LABEL  ## REPO branch
+#            value: main
           - name: SPRING_PROFILES_ACTIVE
             value: git
           - name: CONFIG_GIT_BASEDIR  ## Where to store the config within the docker container

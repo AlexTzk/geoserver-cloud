@@ -24,7 +24,7 @@ spec:
         runAsGroup: 1001
         fsGroup: 1001
       containers:
-        - image: geoservercloud/geoserver-cloud-discovery:1.8.2
+        - image: geoservercloud/geoserver-cloud-discovery:1.9.0
           name: discovery
           ports:
             - containerPort: 8761
